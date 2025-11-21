@@ -1,4 +1,11 @@
+package com.example.ExamenMoc.service;
+
+import com.example.ExamenMoc.entity.Producto;
+import com.example.ExamenMoc.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.Optional;
 
 public class ProductoServiceImpl implements ProductoService {
 
