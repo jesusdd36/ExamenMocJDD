@@ -3,11 +3,15 @@ package com.example.ExamenMoc.controller;
 import com.example.ExamenMoc.entity.Producto;
 import com.example.ExamenMoc.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+@RequestMapping(path = "/api")
+@Service
 public class ProductoController {
 
     @Autowired
@@ -33,10 +37,16 @@ public class ProductoController {
                                        @RequestParam(defaultValue = "") String categoria) {
 
 
-        this.productoService.findAllProductos();
-        this.productoService.findByPrecio(precio);
-        return productoService.findByCategoria(categoria);
+        if (precio >= 25){
+            this.productoService.findByPrecio(precio);
+        }else if (precio < 25){
+            this.productoService.findAllProductos();
+        }else{
+            return productoService.findByCategoria(categoria);
+        }
 
+
+        return this.productoService.findByPrecioAndCategoria(precio,categoria);
     }
 
     @GetMapping(value = "/producto/{productoId}")
